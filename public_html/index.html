@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src = 'WArtColor.js'></script>
+        <link type="text/css" rel="stylesheet" href="WArtColorStyle.css"/>
+    </head>
+    <body>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> 
+
+        <script>window.jQuery || document.write('<script src="jquery-1.9.1.min.js"><\/script>');</script>
+
+        <table align ="center">
+
+            <!-- Brush Sizes -->
+
+            <tr>
+                <td id ="toolbox" style = "z-index: 3">
+                    <br>
+                    <div class="preview"></div>
+
+                    <!-- colorpicker element -->
+                    <div class="colorselect" style="display:none">
+                        <canvas id="layer2" width="400" height="400"></canvas>
+                    </div>
+                    </br>
+                    <br>
+                    <img  onclick= "setSize(sizeLarge);" class ="tools" src ="assets/largepaintbrush.png">
+                    </br>
+                    <br>
+                    <img onclick= "setSize(sizeMedium);" class ="tools" src ="assets/mediumpaintbrush.png">
+                    </br>
+                    <br>
+                    <img onclick= "setSize(sizeSmall);" class ="tools" src ="assets/pencil.png">
+                    </br>
+                    <!-- Eraser note: if you dip the eraser 
+                    in paint you can color with it; not good-->
+                    <br>
+                    <img onclick = "setColor(colorWhite);" class ="tools" src ="assets/eraser.png">
+                    </br>
+                </td>
+
+                <td>
+                    <!-- Canvas --> 
+                    <div id ="coloringCanvas">
+                        <canvas  id='drawingCanvas' style="border: 7px solid silver; z-index:1"  ></canvas>
+                        <canvas  id='layer1' style="border: 7px solid silver; z-index:2" ></canvas>
+                    </div>
+
+                </td>
+
+                <td id ="coloringscroll">
+                    <!-- functionality for selecting to come but it will 
+                    work similar to the current color selection logic -->
+                    <div style="height: 402px;width:130px; overflow:auto;">
+                        <!-- Tools -->
+                        <button>
+                            <img onclick= "setColoringPage(statue1);" class ="coloringPage" src ="assets/statue1thumb.png">
+                        </button>
+                        <button>
+                            <img onclick= "setColoringPage(statue2);" class ="coloringPage" src ="assets/statue2thumb.png">
+                        </button>
+                        <button>
+                            <img onclick= "setColoringPage(statue3);" class ="coloringPage" src ="assets/statue3thumb.png">
+                        </button>
+                        <button>
+                            <img onclick= "setColoringPage(blank);" class ="coloringPage" src ="assets/blankthumb.png">
+                        </button>
+
+                    </div>
+                </td>
+                <td>
+
+<!-- something new? -->
+
+                </td>
+            </tr>
+        </table>
+
+    </body>
+</html>
+

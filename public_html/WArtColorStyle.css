@@ -1,0 +1,83 @@
+/* 
+    Document   : WArtColorStyle
+    Created on : Feb 12, 2013, 3:50:49 PM
+    Author     : jasonhintlian
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    background-color: white;
+}
+#drawingCanvas{
+    border-radius: 10mm;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    cursor: crosshair;
+}
+.tools{
+    float: right;
+    margin: auto;
+    height: 90px;
+    width:50px;
+}
+.coloringPage{
+    margin: 20px 0px 20px 0px;
+    height: 50px;
+    width:90px;
+}
+/* colorpicker styles */
+.colorselect {
+    /*background-color: #fff;*/
+    border-radius: 0px;
+    /*box-shadow: 2px 2px 2px #444444;*/
+    color: #000;
+    font-size: 12px;
+    position: absolute;
+}
+#picker{
+    cursor: crosshair;
+    position: absolute;
+    margin: 10px;
+    border: 0;
+}
+.preview {
+   /* background: url("images/select.png") repeat scroll center center transparent;
+   **/
+   background-color: #000000;
+    border-radius:15px;
+    box-shadow: 2px 2px 2px #444444;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+}
+#toolbox{
+    position: absolute;
+    left: 10mm;
+    top: 30mm;
+}
+#coloringscroll{
+    position: absolute;
+    right: 2mm;
+    top: 35mm;
+}
+#coloringCanvas{
+    cursor: crosshair;
+    position: absolute;
+    left: 20%;
+    top: 5%;
+}
+#layer1{
+    border-radius: 10mm;
+    pointer-events:none;
+    background: transparent;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    cursor: crosshair;
+}
