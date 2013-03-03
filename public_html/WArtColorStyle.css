@@ -14,11 +14,10 @@ body{
     background-color: white;
 }
 #drawingCanvas{
-    border-radius: 10mm;
     position: absolute;
     left: 0px;
     top: 0px;
-    cursor: crosshair;
+    cursor: pointer;
 }
 .tools{
     float: right;
@@ -27,18 +26,33 @@ body{
     width:50px;
 }
 .coloringPage{
-    margin: 20px 0px 20px 0px;
-    height: 50px;
+    border: solid 3px #000000;
+    margin: auto;
+    height: 90px;
     width:90px;
 }
 /* colorpicker styles */
 .colorselect {
-    /*background-color: #fff;*/
+    background-color: #fff;
+    border: solid 3px #000000;
     border-radius: 0px;
     /*box-shadow: 2px 2px 2px #444444;*/
     color: #000;
+    border-radius: 5px;
     font-size: 12px;
     position: absolute;
+    margin-left: 100px;
+    margin-bottom: 200px;
+}
+.sizeselect {
+    background-color: #000;
+    border: solid 3px #000000;
+    /*box-shadow: 2px 2px 2px #444444;*/
+    position: absolute;
+    border-radius: 5px;
+    margin-left: 114px;
+    margin-top: 100px;
+    
 }
 #picker{
     cursor: crosshair;
@@ -47,10 +61,24 @@ body{
     border: 0;
 }
 .preview {
-   /* background: url("images/select.png") repeat scroll center center transparent;
-   **/
-   background-color: #000000;
-    border-radius:15px;
+   background: url("assets/colorButtonBrush.png") repeat scroll center center transparent;
+   
+    border: solid 3px #000000;
+    background-color: #000000;
+    border-radius:50px;
+    box-shadow: 2px 2px 2px #444444;
+    cursor: pointer;
+    height: 60px;
+    width: 60px;
+}
+ .sizepreview {
+     float: right;
+    margin: auto;
+    margin-top: 20px;
+    background: url("assets/colortips.png") repeat scroll center center transparent;
+    border: solid 3px #000000;
+    background-color: #000000;
+    border-radius:5px;
     box-shadow: 2px 2px 2px #444444;
     cursor: pointer;
     height: 60px;
@@ -64,20 +92,31 @@ body{
 #coloringscroll{
     position: absolute;
     right: 2mm;
-    top: 35mm;
+    top: 25mm;
 }
 #coloringCanvas{
-    cursor: crosshair;
+    cursor: pointer;
     position: absolute;
     left: 20%;
     top: 5%;
 }
 #layer1{
-    border-radius: 10mm;
     pointer-events:none;
     background: transparent;
     position: absolute;
     left: 0px;
     top: 0px;
     cursor: crosshair;
+}
+
+#layer1:active {
+    cursor: crosshair;
+}
+#drawingCanvas:active { 
+    cursor: crosshair;
+}
+.scrollButton{
+    margin: auto;
+    height: 30px;
+    width:90px;
 }

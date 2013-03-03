@@ -20,34 +20,27 @@
             <tr>
                 <td id ="toolbox" style = "z-index: 3">
                     <br>
-                    <div class="preview"></div>
+                    <div class="preview" style="text-align: center"></div>
 
-                    <!-- colorpicker element -->
-                    <div class="colorselect" style="display:none">
-                        <canvas id="layer2" width="400" height="400"></canvas>
+                    <!-- color selection element -->
+                    <div class="colorselect" style="display:none; z-index: 2">
+                        <canvas id="layer2" width="427" height="339"></canvas>
                     </div>
-                    </br>
-                    <br>
-                    <img  onclick= "setSize(sizeLarge);" class ="tools" src ="assets/largepaintbrush.png">
-                    </br>
-                    <br>
-                    <img onclick= "setSize(sizeMedium);" class ="tools" src ="assets/mediumpaintbrush.png">
-                    </br>
-                    <br>
-                    <img onclick= "setSize(sizeSmall);" class ="tools" src ="assets/pencil.png">
-                    </br>
-                    <!-- Eraser note: if you dip the eraser 
-                    in paint you can color with it; not good-->
-                    <br>
-                    <img onclick = "setColor(colorWhite);" class ="tools" src ="assets/eraser.png">
-                    </br>
+                    <div style=" text-shadow: 3px; font-family: cursive; font-size: 20px; text-align: center">Colors</div>
+                    <div class="sizepreview"></div>
+
+                    <!-- color selection element -->
+                    <div class="sizeselect" style="display:none; z-index: 1">
+                        <canvas id="layer3" width="400" height="125"></canvas>
+                    </div>
+                    <div style=" text-shadow: 3px; font-family: cursive; font-size: 20px; text-align: center">Sizes</div>
                 </td>
 
                 <td>
                     <!-- Canvas --> 
                     <div id ="coloringCanvas">
-                        <canvas  id='drawingCanvas' style="border: 7px solid silver; z-index:1"  ></canvas>
-                        <canvas  id='layer1' style="border: 7px solid silver; z-index:2" ></canvas>
+                        <canvas  id='drawingCanvas' style="  border: 3px solid black; z-index:1; cursor: crosshair ; "  ></canvas>
+                        <canvas  id='layer1' style="border: 3px solid black; z-index:2; cursor: crosshair" ></canvas>
                     </div>
 
                 </td>
@@ -55,26 +48,46 @@
                 <td id ="coloringscroll">
                     <!-- functionality for selecting to come but it will 
                     work similar to the current color selection logic -->
-                    <div style="height: 402px;width:130px; overflow:auto;">
+                    <br>
+                    <img  class ="scrollButton" src ="assets/scrollUpBlack.png">
+                    </br>
+
+                    <div style="height: 475px;width:130px; overflow:auto;">
                         <!-- Tools -->
-                        <button>
-                            <img onclick= "setColoringPage(statue1);" class ="coloringPage" src ="assets/statue1thumb.png">
-                        </button>
-                        <button>
-                            <img onclick= "setColoringPage(statue2);" class ="coloringPage" src ="assets/statue2thumb.png">
-                        </button>
-                        <button>
-                            <img onclick= "setColoringPage(statue3);" class ="coloringPage" src ="assets/statue3thumb.png">
-                        </button>
-                        <button>
-                            <img onclick= "setColoringPage(blank);" class ="coloringPage" src ="assets/blankthumb.png">
-                        </button>
+
+                        <br>
+                        <img onclick= "setColoringPage(statue1);" class ="coloringPage" src ="assets/thumb1.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue2);" class ="coloringPage" src ="assets/thumb2.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue3);" class ="coloringPage" src ="assets/thumb3.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue4);" class ="coloringPage" src ="assets/thumb4.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue5);" class ="coloringPage" src ="assets/thumb5.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue6);" class ="coloringPage" src ="assets/thumb6.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(statue7);" class ="coloringPage" src ="assets/thumb7.png">
+                        </br>
+                        <br>
+                        <img onclick= "setColoringPage(blank);" class ="coloringPage" src ="assets/blankthumb.png">
+                        </br>
 
                     </div>
+                    <br>
+                    <img  class ="scrollButton" src ="assets/scrollDownBlack.png">
+                    </br>
                 </td>
                 <td>
 
-<!-- something new? -->
+                    <!-- something new? -->
 
                 </td>
             </tr>
