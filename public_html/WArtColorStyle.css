@@ -14,25 +14,26 @@ ul
     list-style-type: none;
 }
 /* overrides jquery mobile */
+
 .ui-page {
-    background: transparent;
+    background:#ffffff !important;
+    border:none;
 }
 
 body{
-    background-color: white;
+    -webkit-user-select:none;
+    background-color: white !important;
+    overflow:visible;
+    overflow-x:auto;
 }
 #drawingCanvas{
+    /*border: 5px solid black;*/
     position: absolute;
     left: 0px;
     top: 0px;
     cursor: pointer;
 }
-.tools{
-    float: right;
-    margin: auto;
-    height: 90px;
-    width:50px;
-}
+
 .coloringPage{
     border: solid 3px #000000;
     margin: auto;
@@ -41,32 +42,10 @@ body{
 }
 /* colorpicker styles */
 .colorselect {
-    background-color: #fff;
-    border: solid 3px #000000;
-    border-radius: 0px;
-    /*box-shadow: 2px 2px 2px #444444;*/
-    color: #000;
-    border-radius: 5px;
-    font-size: 12px;
+    background-color: white;
     position: absolute;
-    margin-left: 100px;
-    margin-bottom: 200px;
-}
-.sizeselect {
-    background-color: #fff;
-    border: solid 3px #000000;
-    box-shadow: 5px 5px 5px #444444;
-    position: absolute;
-    border-radius: 5px;
-    margin-left: 100px;
-    margin-top: 10px;
-
-}
-#picker{
-    cursor: crosshair;
-    position: absolute;
-    margin: 10px;
-    border: 0;
+    top: 2%;
+    left: 1%;
 }
 
 
@@ -74,99 +53,106 @@ body{
     background: url("assets/transparentPaintPalette.png") repeat scroll center center transparent;
     background-color: #000000;
     box-shadow: 0px 0px 0px #444444;
+    border-top: solid 5px #eaeaea;
+    border-left: solid 5px #eaeaea;
+    border-bottom: solid 5px #777;
+    border-right: solid 5px #777;
     border-radius:10px;
 }
-#preview.down {
-    background: url("assets/transparentPaintPalette.png") repeat scroll center center transparent;
-    box-shadow: 10px 10px 10px #444444;
-}
-#sizepreview {
-    background: url("assets/colortips.png") repeat scroll center center transparent;
-    background-color: #000000;
-    box-shadow: 0px 0px 0px #444444;
-    border-radius:10px;
-}
-#sizepreview.down {
-    box-shadow: 10px 10px 10px #444444;
-}
+
 #brushtool {
     background: url("assets/colorButtonBrush.png") repeat scroll center center transparent;
     background-color: #000000;
-    box-shadow: 10px 10px 10px #444444;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #777;
-    border-right: solid 5px #777;
 }
-#brushtool.down {
-    box-shadow: 0px 0px 0px #444444;
-}
+
 #buckettool {
     background: url("assets/paintBucket.png") repeat scroll center center transparent;
     background-color: #000000;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #777;
-    border-right: solid 5px #777;
-    box-shadow: 0px 0px 0px #444444;
 }
-#buckettool.down {
-    box-shadow: 10px 10px 10px #444444;
-}
+
 #erasertool {
     background: url("assets/eraser.png") repeat scroll center center transparent;
+    background-color: pink;
+}
+#spraytool {
+    background: url("assets/spraypaint.png") repeat scroll center center transparent;
     background-color: #000000;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #777;
-    border-right: solid 5px #777;
-    box-shadow: 0px 0px 0px #444444;
 }
-#erasertool.down {
-    box-shadow: 10px 10px 10px #444444;
+#undoButton {
+    background: url("assets/undobutton.png") repeat scroll center center transparent;
 }
+#cleartool {
+    background: url("assets/clearbutton.png") repeat scroll center center transparent;
+}
+#redoButton {
+    background: url("assets/redobutton.png") repeat scroll center center transparent;
+}
+
 .tilebutton{
-    border-radius: 40px;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #777;
-    border-right: solid 5px #777; 
-    width: 50%;
+    border: solid 5px whitesmoke;
+    border-radius: 40px; 
     margin: 0px auto;
     cursor: pointer;
     height: 60px;
     width: 60px
 }
+.ucr{
+    margin: 0px auto;
+    height: 75px;
+    width: 70px
+}
+.paintbutton{
+    border: solid 5px whitesmoke;
+    border-radius: 40px; 
+    margin: 0px auto;
+    cursor: pointer;
+    height: 50px;
+    width: 50px
+}
+
+#toolset{
+    /* border-radius: 30px;
+     border-top: solid 5px #eaeaea;
+     border-left: solid 5px #eaeaea;
+     border-bottom: solid 5px #888;
+     border-right: solid 5px #888; 
+     background-color: #cccccc;
+     padding-top: 20px;
+     width: 100px;*/
+}
 #toolbox{
     position: absolute;
-    left: 10mm;
-    top: 30mm;
+    left:3%;
+    top: 35%;
 }
-#toolset{
-   /* border-radius: 30px;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #888;
-    border-right: solid 5px #888; 
-    background-color: #cccccc;
-    padding-top: 20px;
-    width: 100px;*/
+#colorTable{
+    position: absolute;
+    left: 1.5%;
+    top: 3%;
+}
+#undoClearRedo{
+    position: absolute;
+    left: 6.5%;
+    top: 70%;
+}
+.sizeselect {
+    background-color: #fff;
+    position: absolute;
+    border-radius: 5px;
+    top: 50%;
+    left: 1%;
 }
 .toolText{
     font-family: cursive; 
     font-size: 20px; 
     text-align: center
 }
-#coloringscroll{
-    position: absolute;
-    right: 2mm;
-    top: 25mm;
-}
+
 #coloringCanvas{
     cursor: pointer;
-    position: absolute;
-    left: 20%;
-    top: 5%;
+    position: fixed;
+    left: 34%;
+    top: 1%;
 }
 #layer1{
     pointer-events:none;
@@ -184,34 +170,51 @@ body{
     cursor: crosshair;
 }
 .scrollButton{
-    margin: auto;
-    height: 30px;
-    width:80px;
+    height: 70px;
+    width:30px;
     padding-left:10px;
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 10px;
 }
+#scrollButtonLeft{
+    position: absolute;
+    left: 0%;
+    bottom: 1.5%;
+}
+#scrollButtonRight{
+    position: fixed;
+    left: 300px;
+    bottom: 1.5%;
+}
 #scrollContainer{
-    height: 440px; 
-    width:120px; 
-    overflow: auto;
+    position: fixed;
+    left: 47px;
+    bottom: 0%;
+    height: 100px; 
+    width: 255px; 
+    overflow: hidden;
+    overflow: no-display;
+    -webkit-overflow-scroll:touch;
+}
+#carousel{
+    overflow: scroll;
+    -webkit-overflow-scroll:touch;
 }
 
 #carousel ul { 
     list-style-type:none;
-    margin-left:0; left:0; 
+    margin-left:0; 
+    left:0; 
     padding-left:0px;
+    width: 687px;
 }
 #carousel li { 
     display:inline;
     margin: auto;
 }
 #carousel ul li img{ 
-    width: 100px; 
-    height: 100px; 
+    width: 80px; 
+    height: 80px; 
     border:1px solid #ccc;
     margin: auto;
-}
-div ul{
-    
 }
