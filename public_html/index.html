@@ -22,25 +22,35 @@
     <body>
         <table id="colorTable"> <!-- start color buttons table -->
             <tr>
-                <td><div  class="paintbutton" style="background:#52cccc;" onclick= "setPaint('#52cccc');"></div></td>
-                <td><div  class="paintbutton" style="background:#efb29e;" onclick= "setPaint('#efb29e');"></div></td>
-                <td><div  class="paintbutton" style="background:#3083d6;" onclick= "setPaint('#3083d6');"></div></td>
-                <td><div  class="paintbutton" style="background:#f8ddd4;" onclick= "setPaint('#f8ddd4');"></div></td>
-                <td><div  class="paintbutton" style="background:#ffffff;" onclick= "setPaint('#ffffff');"></div></td>
-            </tr>
-            <tr>
-                <td><div  class="paintbutton" style="background:#29a6cf;" onclick= "setPaint('#29a6cf');"></div></td>
-                <td><div  class="paintbutton" style="background:#bc8f8f;" onclick= "setPaint('#bc8f8f');"></div></td>
                 <td><div  class="paintbutton" style="background:#ffcc00;" onclick= "setPaint('#ffcc00');"></div></td>
-                <td><div  class="paintbutton" style="background:#deb887;" onclick= "setPaint('#deb887');"></div></td>
-                <td><div  class="paintbutton" style="background:#000000;" onclick= "setPaint('#000000');"></div></td>
+                <td><div  class="paintbutton" style="background:#ffa347;" onclick= "setPaint('#ffa347');"></div></td>
+                <td><div  class="paintbutton" style="background:#e65c00;" onclick= "setPaint('#e65c00');"></div></td>
+                
+                
+                <!--<td><div  class="paintbutton" style="background:#ffffff;" onclick= "setPaint('#ffffff');"></div></td>-->
             </tr>
             <tr>
-                <td><div  class="paintbutton" style="background:#e65c00;" onclick= "setPaint('#e65c00');"></div></td>
-                <td><div  class="paintbutton" style="background:#ffa347;" onclick= "setPaint('#ffa347');"></div></td>
+                <td><div  class="paintbutton" style="background:#52cccc;" onclick= "setPaint('#52cccc');"></div></td>
+                <td><div  class="paintbutton" style="background:#29a6cf;" onclick= "setPaint('#29a6cf');"></div></td>
+                <td><div  class="paintbutton" style="background:#3083d6;" onclick= "setPaint('#3083d6');"></div></td>
+    
+               <!-- <td><div  class="paintbutton" style="background:#000000;" onclick= "setPaint('#000000');"></div></td> -->
+            </tr>
+            <tr>
+                <td><div  class="paintbutton" style="background:#f8ddd4;" onclick= "setPaint('#f8ddd4');"></div></td>
+                <td><div  class="paintbutton" style="background:#efb29e;" onclick= "setPaint('#efb29e');"></div></td>
+                <td><div  class="paintbutton" style="background:#bc8f8f;" onclick= "setPaint('#bc8f8f');"></div></td>
+                <!-- <td><div class ="paintbutton"  id = "preview"></div></td> -->
+            </tr>
+            <tr>
+                <td><div  class="paintbutton" style="background:#deb887;" onclick= "setPaint('#deb887');"></div></td>
                 <td><div  class="paintbutton" style="background:#993300;" onclick= "setPaint('#993300');"></div></td>
                 <td><div  class="paintbutton" style="background:#b85c00;" onclick= "setPaint('#b85c00');"></div></td>
-                <td><div class ="paintbutton"  id = "preview"></div></td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                   <div class ="paintbutton"  id = "preview"></div> 
+                </td>
             </tr>
         </table> <!-- end color buttons table -->
 
@@ -50,17 +60,21 @@
         <table id ="toolbox" style = "z-index: 3">
             <!-- color selection element -->
             <tr>
-                <canvas id="layer3" class="sizeselect" width="340" height="100"></canvas>
+                <canvas id="layer3" class="sizeselect" width="230" height="68"></canvas>
             <tr>
             <tr>
-
+                <canvas id="undoClearRedo" class="ucr" width="188" height="68"></canvas>
+            <tr>
+            
+            <tr>
                 <td>
                     <div class ="tilebutton" id ="brushtool"></div>
-                   <!-- <div class ="toolText"><b>Brush</b></div> -->
                 </td>
                 <td>
                     <div class ="tilebutton" id ="buckettool"></div>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <div class ="tilebutton" id ="spraytool"></div>
                 </td>
@@ -69,7 +83,7 @@
                 </td>
             </tr>
         </table>
-        <table id ="undoClearRedo">
+      <!--  <table id ="undoClearRedo">
             <tr >
                 <td>
                     <div class ="ucr" id ="undoButton"></div>
@@ -82,20 +96,23 @@
                 </td>
             </tr>
 
-        </table>
+        </table>-->
 
-        <div id ="coloringscroll">
+        <!-- Canvas -->
+        <div id ="coloringCanvas">
+            <canvas  id='drawingCanvas' style="  z-index:1; cursor: crosshair ; "  ></canvas>
+            <canvas  id='layer1' style=" z-index:2; cursor: crosshair" ></canvas>
+            <!-- could fix fill issues with a third layer-->
+        </div>
+        <div class ="colorselect" style="display:none; z-index: 1">
+                        <canvas id="layer2" width="200" height="260"></canvas>
+        </div>
+                <div id ="coloringscroll">
 
             <!-- functionality for selecting to come but it will
             work similar to the current color selection logic -->
 
-            <ul style="float: left">
-
-                <li>
-                    <a id="scrollButtonLeft" href="#" style="float: left; right: 99%" >
-                        <img  class ="scrollButton" src ="assets/scrollLeftBlack.png">
-                    </a>
-                    <a>
+           
                         <div id ="scrollContainer" onclick=''>
                             <!-- Tools -->
                             <div id="carousel" onclick=''  >
@@ -121,30 +138,11 @@
                                     <li>
                                         <img onclick= "setColoringPage(statue7);" class ="coloringPage" src ="assets/thumb7.png">
                                     </li>
-                                    <li>
-                                        <img onclick= "setColoringPage(blank);" class ="coloringPage" src ="assets/blankthumb.png">
-                                    </li>
                                 </ul>
                             </div>
                         </div>
-                    </a>
-                    <a id="scrollButtonRight" href="#" style="float: right">
-                        <img  class ="scrollButton" src ="assets/scrollRightBlack.png">
-                    </a>
-                </li>
+            
 
-            </ul>
-
-        </div>
-
-        <!-- Canvas -->
-        <div id ="coloringCanvas">
-            <canvas  id='drawingCanvas' style="  z-index:1; cursor: crosshair ; "  ></canvas>
-            <canvas  id='layer1' style=" z-index:2; cursor: crosshair" ></canvas>
-            <!-- could fix fill issues with a third layer-->
-        </div>
-        <div class ="colorselect" style="display:none; z-index: 1">
-                        <canvas id="layer2" width="265" height="198"></canvas>
         </div>
     </body>
 

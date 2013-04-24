@@ -27,9 +27,9 @@ body{
     overflow-x:auto;
 }
 #drawingCanvas{
-    /*border: 5px solid black;*/
+    border: 1px solid black;
     position: absolute;
-    left: 0px;
+    left: -100px;
     top: 0px;
     cursor: pointer;
 }
@@ -44,20 +44,21 @@ body{
 .colorselect {
     background-color: white;
     position: absolute;
-    top: 2%;
+    top: 0%;
     left: 1%;
 }
 
 
 #preview {
-    background: url("assets/transparentPaintPalette.png") repeat scroll center center transparent;
+    background: url("assets/paintPalette.png") repeat scroll center center transparent;
     background-color: #000000;
     box-shadow: 0px 0px 0px #444444;
-    border-top: solid 5px #eaeaea;
-    border-left: solid 5px #eaeaea;
-    border-bottom: solid 5px #777;
-    border-right: solid 5px #777;
+    /*border-top: solid 3px #eaeaea;
+    border-left: solid 3px #eaeaea;
+    border-bottom: solid 3px #777;
+    border-right: solid 3px #777;*/
     border-radius:10px;
+    width: auto;
 }
 
 #brushtool {
@@ -89,25 +90,27 @@ body{
 }
 
 .tilebutton{
-    border: solid 5px whitesmoke;
-    border-radius: 40px; 
+    border: solid 5px lightgray;
+    border-radius: 10px; 
+    margin: 0px auto;
+    cursor: pointer;
+    height: 75px;
+    width: 75px
+}
+.ucr{
+    /*border: solid 5px lightgray;*/
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+    margin: 0px auto;
+}
+.paintbutton{
+    border: solid 0px whitesmoke;
+    border-radius: 10px; 
     margin: 0px auto;
     cursor: pointer;
     height: 60px;
     width: 60px
-}
-.ucr{
-    margin: 0px auto;
-    height: 75px;
-    width: 70px
-}
-.paintbutton{
-    border: solid 5px whitesmoke;
-    border-radius: 40px; 
-    margin: 0px auto;
-    cursor: pointer;
-    height: 50px;
-    width: 50px
 }
 
 #toolset{
@@ -122,25 +125,28 @@ body{
 }
 #toolbox{
     position: absolute;
-    left:3%;
-    top: 35%;
+    margin: 0px;
+    left:1.75%;
+    top: 48%;
 }
 #colorTable{
     position: absolute;
-    left: 1.5%;
-    top: 3%;
+    left: 1%;
+    top: 1%;
 }
 #undoClearRedo{
     position: absolute;
-    left: 6.5%;
-    top: 70%;
+    left: 1.3%;
+    bottom: 1%;
+    width: 188px; 
+    height: 68px;
 }
 .sizeselect {
     background-color: #fff;
     position: absolute;
     border-radius: 5px;
-    top: 50%;
-    left: 1%;
+    top: 76%;
+    left: 0.7%;
 }
 .toolText{
     font-family: cursive; 
@@ -158,7 +164,7 @@ body{
     pointer-events:none;
     background: transparent;
     position: absolute;
-    left: 0px;
+    left: -100px;
     top: 0px;
     cursor: crosshair;
 }
@@ -187,26 +193,26 @@ body{
     bottom: 1.5%;
 }
 #scrollContainer{
-    position: fixed;
-    left: 47px;
-    bottom: 0%;
-    height: 100px; 
-    width: 255px; 
-    overflow: hidden;
-    overflow: no-display;
-    -webkit-overflow-scroll:touch;
+    position: absolute;
+    top: 2%;
+    right: 10px;
+    height: 600px; 
+    width: 90px; 
 }
 #carousel{
-    overflow: scroll;
-    -webkit-overflow-scroll:touch;
+    
+}
+.coloringPage{
+    /*border: solid 3px #000000;*/
+    margin: auto;
+    height: 90px;
+    width:90px;
 }
 
 #carousel ul { 
-    list-style-type:none;
-    margin-left:0; 
-    left:0; 
+    list-style-type:none; 
     padding-left:0px;
-    width: 687px;
+    width: 100px;
 }
 #carousel li { 
     display:inline;
@@ -215,6 +221,6 @@ body{
 #carousel ul li img{ 
     width: 80px; 
     height: 80px; 
-    border:1px solid #ccc;
+    border:0px solid #ccc;
     margin: auto;
 }
