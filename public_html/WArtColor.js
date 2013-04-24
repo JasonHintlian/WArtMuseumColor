@@ -73,8 +73,8 @@ window.onload = window.onresize = function() {
 // color menu
     var canvas1 = document.getElementById('layer2');
     var ctx1 = canvas1.getContext('2d');
-    
-    
+
+
     // ctx = document.getElementById('myCanvas').getContext("2d");
 
 
@@ -160,48 +160,49 @@ window.onload = window.onresize = function() {
 
 
 
-        if (!colorPanelOpen && !sizePanelOpen) {
-            var canvasOffset = $(myCanvas).offset();
-            var canvasX = Math.floor(e.pageX - canvasOffset.left);
-            var canvasY = Math.floor(e.pageY - canvasOffset.top);
-            if (state === fillBucket) {
-                floodFillScanLine(canvasX, canvasY, currentColor, context, context1);
-            } else {
-                context.beginPath();
-                context.lineCap = "round";//Draw a line with rounded end caps
-                context.lineJoin = "round";//Create a rounded corner when the two lines meet
 
-                if (state === spray) {
-                    for (var pass = 0; pass < softWidths.length; pass++) {
-                        context.lineWidth = (currentSize * 1.5) * softWidths[pass];
-                        context.strokeStyle = "rgba(" + currentColorR + "," + currentColorG + "," + currentColorB + "," + .01 * pass / 2 + ")";
-                        context.moveTo(canvasX - 1, canvasY);
-                        context.lineTo(canvasX, canvasY);
-                        context.stroke();
-                    }
-                } else {
-                    if (state === eraser) {
-                        context.strokeStyle = "white";
-                    } else {
-                        context.strokeStyle = currentColor;
-                    }
-                    context.lineWidth = currentSize;
+        var canvasOffset = $(myCanvas).offset();
+        var canvasX = Math.floor(e.pageX - canvasOffset.left);
+        var canvasY = Math.floor(e.pageY - canvasOffset.top);
+
+        if (state === fillBucket) {
+            floodFillScanLine(canvasX, canvasY, currentColor, context, context1);
+        } else {
+            context.beginPath();
+            context.lineCap = "round";//Draw a line with rounded end caps
+            context.lineJoin = "round";//Create a rounded corner when the two lines meet
+
+            if (state === spray) {
+                for (var pass = 0; pass < softWidths.length; pass++) {
+                    context.lineWidth = (currentSize * 1.5) * softWidths[pass];
+                    context.strokeStyle = "rgba(" + currentColorR + "," + currentColorG + "," + currentColorB + "," + .01 * pass / 2 + ")";
                     context.moveTo(canvasX - 1, canvasY);
                     context.lineTo(canvasX, canvasY);
                     context.stroke();
                 }
+            } else {
+                if (state === eraser) {
+                    context.strokeStyle = "white";
+                } else {
+                    context.strokeStyle = currentColor;
+                }
+                context.lineWidth = currentSize;
+                context.moveTo(canvasX - 1, canvasY);
+                context.lineTo(canvasX, canvasY);
+                context.stroke();
             }
-            painting = true;
         }
+        painting = true;
 
 
-        if (colorPanelOpen) {
-            $('.colorselect').fadeToggle("fast", "linear");
-            colorPanelOpen = false;
-            $("#preview").toggleClass("down");
-            $('#preview').css("border", "0px 0px 0px #333333");
-            buttonColor = false;
-        }
+
+        /* if (colorPanelOpen) {
+         $('.colorselect').fadeToggle("fast", "linear");
+         colorPanelOpen = false;
+         $("#preview").toggleClass("down");
+         $('#preview').css("border", "0px 0px 0px #333333");
+         buttonColor = false;
+         }*/
     });
 
 
@@ -269,82 +270,6 @@ window.onload = window.onresize = function() {
     //***************** Drawing Canvas Events ******************//
 
 
-    //***************** Left Side Buttons ******************//
-
-
-    var buttonBrush = true;
-    $('#brushtool').css("border", "5px solid #666666");
-    var buttonBucket = false;
-    var buttonEraser = false;
-    var buttonSpray = false;
-    var buttonClear = false;
-    var buttonUndo = false;
-    var buttonRedo = false;
-
-    $(document).ready(function() {
-
-
-        $("#cleartool").on("vmousedown touchstart", function() {
-            if (buttonClear === false) {
-                setColoringPage('clear');
-                $('#cleartool').css("background", "url(assets/clearbuttondown.png)");
-                buttonClear = true;
-            }
-        });
-        $("#cleartool").on("vmouseup touchend", function() {
-            if (buttonClear === true) {
-                $('#cleartool').css("background", "url(assets/clearbutton.png)");
-                buttonClear = false;
-            }
-        });
-        $("#cleartool").on("vmouseout", function() {
-            if (buttonClear === true) {
-                $('#cleartool').css("background", "url(assets/clearbutton.png)");
-                buttonClear = false;
-            }
-        });
-
-        $("#undoButton").on("vmousedown touchstart", function() {
-            if (buttonUndo === false) {
-
-                $('#undoButton').css("background", "url(assets/undobuttondown.png)");
-                buttonUndo = true;
-            }
-        });
-        $("#undoButton").on("vmouseup touchend", function() {
-            cUndo();
-            if (buttonUndo === true) {
-                $('#undoButton').css("background", "url(assets/undobutton.png)");
-                buttonUndo = false;
-            }
-        });
-        $("#undoButton").on("vmouseout", function() {
-            if (buttonUndo === true) {
-                $('#undoButton').css("background", "url(assets/undobutton.png)");
-                buttonUndo = false;
-            }
-        });
-
-        $("#redoButton").on("vmousedown touchstart", function() {
-            if (buttonRedo === false) {
-
-                $('#redoButton').css("background", "url(assets/redobuttondown.png)");
-                buttonRedo = true;
-            }
-        });
-        $("#redoButton").on("vmouseup touchend", function() {
-            if (buttonRedo === true) {
-                $('#redoButton').css("background", "url(assets/redobutton.png)");
-                buttonRedo = false;
-            }
-        });
-        $("#redoButton").on("vmouseout", function() {
-            if (buttonRedo === true) {
-                $('#redoButton').css("background", "url(assets/redobutton.png)");
-                buttonRedo = false;
-            }
-        });
-
         //***************** Color Button ******************//
 
         $('#preview').on('vmousedown', function() {
@@ -354,15 +279,15 @@ window.onload = window.onresize = function() {
             $('#buckettool').css('backgroundColor', currentColor);
             $('#spraytool').css('backgroundColor', currentColor);
             if (!buttonColor) {
-               // $('#preview').css("box-shadow", "10px 10px 10px #666666");
+                // $('#preview').css("box-shadow", "10px 10px 10px #666666");
                 //$('#preview').css("border", "1px solid #666666");
                 $('#preview').css("background", "url(assets/paintPalette2.png)");
                 buttonColor = true;
             } else {
-               // $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
+                // $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
                 $('#preview').css("background", "url(assets/paintPalette.png)");
                 buttonColor = false;
-                
+
             }
 
             $('#preview').css('backgroundColor', currentColor);
@@ -380,239 +305,6 @@ window.onload = window.onresize = function() {
 
         //***************** Color Button End ******************//
 
-        //***************** Tools ******************//
-
-        $('#brushtool').on('vmousedown', function() {
-
-           /* if (buttonColor) {
-                $('#preview').css('backgroundColor', currentColor);
-                $('#brushtool').css('backgroundColor', currentColor);
-                $('#buckettool').css('backgroundColor', currentColor);
-                $('#spraytool').css('backgroundColor', currentColor);
-
-                $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css('backgroundColor', currentColor);
-                buttonColor = false;
-                if (colorPanelOpen) {
-                    $('.colorselect').fadeToggle("fast", "linear");
-                    colorPanelOpen = false;
-                }
-            }*/
-
-
-            if (!buttonBrush) {
-                state = paint;
-                $('#brushtool').css("border", "5px solid #666666");
-                buttonBrush = true;
-
-                if (buttonBucket) {
-                    $('#buckettool').css("border", "5px solid whitesmoke");
-                    buttonBucket = false;
-                }
-
-                if (buttonEraser) {
-                    $('#erasertool').css("border", "5px solid whitesmoke");
-                    buttonEraser = false;
-                }
-                if (buttonSpray) {
-                    $('#spraytool').css("border", "5px solid whitesmoke");
-                    buttonSpray = false;
-                }
-            }
-        });
-
-        $('#buckettool').on('vmousedown', function() {
-
-           /* if (buttonColor) {
-                $('#preview').css('backgroundColor', currentColor);
-                $('#brushtool').css('backgroundColor', currentColor);
-                $('#buckettool').css('backgroundColor', currentColor);
-                $('#spraytool').css('backgroundColor', currentColor);
-                $('#buckettool').css('backgroundColor', currentColor);
-                $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css('backgroundColor', currentColor);
-                buttonColor = false;
-                if (colorPanelOpen) {
-                    $('.colorselect').fadeToggle("fast", "linear");
-                    colorPanelOpen = false;
-                }
-            }*/
-
-            if (!buttonBucket) {
-                state = fillBucket;
-                $('#buckettool').css("border", "5px solid #666666");
-                buttonBucket = true;
-
-                if (buttonBrush) {
-                    $('#brushtool').css("border", "5px solid whitesmoke");
-                    buttonBrush = false;
-                }
-
-                if (buttonEraser) {
-                    $('#erasertool').css("border", "5px solid whitesmoke");
-                    buttonEraser = false;
-                }
-                if (buttonSpray) {
-                    $('#spraytool').css("border", "5px solid whitesmoke");
-                    buttonSpray = false;
-                }
-            }
-        });
-        $('#erasertool').on('vmousedown', function() {
-
-         /*   if (buttonColor) {
-                $('#preview').css('backgroundColor', currentColor);
-                $('#brushtool').css('backgroundColor', currentColor);
-                $('#buckettool').css('backgroundColor', currentColor);
-                $('#spraytool').css('backgroundColor', currentColor);
-                $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css('backgroundColor', currentColor);
-                buttonColor = false;
-                if (colorPanelOpen) {
-                    $('.colorselect').fadeToggle("fast", "linear");
-                    colorPanelOpen = false;
-                }
-            }*/
-
-            if (!buttonEraser) {
-                state = eraser;
-                $('#erasertool').css("border", "5px solid #666666");
-                buttonEraser = true;
-
-                if (buttonBrush) {
-                    $('#brushtool').css("border", "5px solid whitesmoke");
-                    buttonBrush = false;
-                }
-
-                if (buttonBucket) {
-                    $('#buckettool').css("border", "5px solid whitesmoke");
-                    buttonBucket = false;
-                }
-                if (buttonSpray) {
-                    $('#spraytool').css("border", "5px solid whitesmoke");
-                    buttonSpray = false;
-                }
-            }
-        });
-
-        $('#spraytool').on('vmousedown', function() {
-
-/*            if (buttonColor) {
-                $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css('backgroundColor', currentColor);
-                buttonColor = false;
-                if (colorPanelOpen) {
-                    $('.colorselect').fadeToggle("fast", "linear");
-                    colorPanelOpen = false;
-                }
-            }*/
-            if (!buttonSpray) {
-                state = spray;
-                $('#spraytool').css("border", "5px solid #666666");
-                buttonSpray = true;
-            }
-
-            if (buttonBrush) {
-                $('#brushtool').css("border", "5px solid whitesmoke");
-                buttonBrush = false;
-            }
-
-            if (buttonBucket) {
-                $('#buckettool').css("border", "5px solid whitesmoke");
-                buttonBucket = false;
-            }
-            if (buttonEraser) {
-                $('#erasertool').css("border", "5px solid whitesmoke");
-                buttonEraser = false;
-            }
-        });
-
-        //***************** Tools End ******************//
-
-    });
-
-  /*  var scrollDown = true;
-
-    $(document).ready(function() {
-
-        $('#scrollButtonLeft').css('opacity', .10);
-        if (buttonColor) {
-            $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-            $('#preview').css('backgroundColor', currentColor);
-            buttonColor = false;
-            if (colorPanelOpen) {
-                $('.colorselect').fadeToggle("fast", "linear");
-                colorPanelOpen = false;
-            }
-        }
-
-        if ($('#carousel ul').width() > $('#scrollContainer').width()) {
-            $("#scrollButtonRight").hover(function() {
-                animateContent("down");
-
-                if (scrollDown) {
-                    scrollDown = false;
-                    $('#scrollButtonLeft').css('opacity', 1)
-                    $('#scrollButtonRight').css('opacity', .10);
-                    ;
-                }
-            }, function() {
-                $('#carousel ul').stop();
-            });
-
-            $("#scrollButtonLeft").hover(function() {
-                if (buttonColor) {
-                    $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                    $('#preview').css('backgroundColor', currentColor);
-                    buttonColor = false;
-                    if (colorPanelOpen) {
-                        $('.colorselect').fadeToggle("fast", "linear");
-                        colorPanelOpen = false;
-                    }
-                }
-                animateContent("left");
-
-                if (!scrollDown) {
-                    scrollDown = true;
-                    $('#scrollButtonLeft').css('opacity', .10);
-                    $('#scrollButtonRight').css('opacity', 1);
-                }
-            }, function() {
-                $('#carousel ul').stop();
-            });
-        }
-    });
-
-    function animateContent(direction) {
-
-        var animationOffset = $('#scrollContainer').width() - $('#carousel ul').width();
-        if (direction === 'left') {
-            animationOffset = 0;
-        }
-        var speed = 1200;
-        $('#carousel ul').animate({"marginLeft": animationOffset + "px"}, speed);
-    }
-    */
-
-    //***************** Scroll Button Shading ******************//
-
-    /*    $(function() {
-     $('#scrollButtonUp').css('opacity', 0);
-     
-     $('#scrollContainer').scroll(function() {
-     var total = $(this)[0].scrollHeight - $(this).height();
-     var opacity = $(this).scrollTop() / total;
-     $('#scrollButtonDown').css('opacity', opacity);
-     $('#scrollButtonUp').css('opacity', (1 - opacity));
-     });
-     
-     /*   $('#scrollButtonDown').click(function() {
-     $('#carousel ul').animate({
-     scrollTop: 0
-     }, 100);
-     });
-     }); */
-
 
     //***************** Color Select Canvas Events ******************//
 
@@ -626,13 +318,13 @@ window.onload = window.onresize = function() {
         var imageSrc = 'assets/colorWheel.png';
         image.src = imageSrc;
 
-       /* var image2 = new Image();
-        var imageSrc2 = 'assets/whiteBlackSelectArrow.png';
-        image2.src = imageSrc2;*/
+        /* var image2 = new Image();
+         var imageSrc2 = 'assets/whiteBlackSelectArrow.png';
+         image2.src = imageSrc2;*/
 
         image.onload = function() {
             ctx1.drawImage(image, 0, 0, 200, 260);
-           // ctx1.drawImage(image2, 210, 168, 40, 20);
+            // ctx1.drawImage(image2, 210, 168, 40, 20);
         };
 
         var currentY = 168;
@@ -702,8 +394,8 @@ window.onload = window.onresize = function() {
 
                 ctx.fillStyle = currentColor;
                 ctx.fillRect(10, 4, 210, 60);
-                ctx.drawImage(image3, 0, 0, 230, 68);
-                ctx.drawImage(image4, 0, 0, 230, 68);
+                ctx.drawImage(image3, 0, 0, 200, 60);
+                ctx.drawImage(image4, 0, 0, 200, 60);
             }
 
 
@@ -777,15 +469,11 @@ window.onload = window.onresize = function() {
     //***************** Size Select Canvas Events ******************//
 
     // drawing active images
-
-    image3.onload = function() {
-        ctx.drawImage(image3, 0, 0, 230, 68);
-        ctx.drawImage(image4, 0, 0, 230, 68);
-    };
     ctx.fillStyle = currentColor;
-    ctx.fillRect(10, 4, 210, 60);
-    ctx.drawImage(image3, 0, 0, 230, 68);
-    ctx.drawImage(image4, 0, 0, 230, 68);
+    ctx.fillRect(10, 4, 200, 60);
+    ctx.drawImage(image3, 0, 0, 200, 60);
+    ctx.drawImage(image4, 0, 0, 200, 60);
+
 
 
     // size background image
@@ -798,178 +486,227 @@ window.onload = window.onresize = function() {
             var canvasOffset = $(canvas).offset();
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
-            if (canvasX <= 46) {
+            if (canvasX <= 26) {
                 currentSize = sizeExtraSmall;
                 //ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 var imageSrc4 = 'assets/sizeSelectionExtraSmall.png';
                 image4.src = imageSrc4;
                 image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);
+                    ctx.drawImage(image4, 0, 0, 200, 60);
                 };
 
             }
-            if (canvasX <= 92 && canvasX > 46) {
+            if (canvasX <= 52 && canvasX > 26) {
                 currentSize = sizeSmall;
                 //ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 var imageSrc4 = 'assets/sizeSelectionSmall.png';
                 image4.src = imageSrc4;
                 image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);
+                    ctx.drawImage(image4, 0, 0, 200, 60);
                 };
             }
-            if (canvasX <= 148 && canvasX > 92) {
+            if (canvasX <= 86 && canvasX > 52) {
                 currentSize = sizeMedium;
                 //ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 var imageSrc4 = 'assets/sizeSelectionMedium.png';
                 image4.src = imageSrc4;
                 image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);
+                    ctx.drawImage(image4, 0, 0, 200, 60);
                 };
             }
-            if (canvasX <= 227 && canvasX > 148) {
+            if (canvasX <= 132 && canvasX > 86) {
                 currentSize = sizeLarge;
                 //ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 var imageSrc4 = 'assets/sizeSelectionLarge.png';
                 image4.src = imageSrc4;
                 image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);
+                    ctx.drawImage(image4, 0, 0, 200, 60);
                 };
             }
-            if (canvasX <= 326 && canvasX > 227) {
+            if (canvasX <= 190 && canvasX > 132) {
                 currentSize = sizeExtraLarge;
                 //ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 var imageSrc4 = 'assets/sizeSelectionExtraLarge.png';
                 image4.src = imageSrc4;
                 image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);
+                    ctx.drawImage(image4, 0, 0, 200, 60);
                 };
             }
-
-            if (buttonColor) {
-                $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css('backgroundColor', currentColor);
-                buttonColor = false;
-                if (colorPanelOpen) {
-                    $('.colorselect').fadeToggle("fast", "linear");
-                    colorPanelOpen = false;
-                }
-            }
-
         });
     });
-    
+
     // undoClearRedo menu
-    
-    
-    
-      
+
+
+
+
     var canvasUCR = document.getElementById('undoClearRedo');
     var ctxUCR = canvasUCR.getContext('2d');
-    
+
     var imageUndo = new Image();
     var imageSrc = 'assets/Buttons/undo-off-01.png';
     imageUndo.src = imageSrc;
     imageUndo.onload = function() {
         ctxUCR.drawImage(imageUndo, 0, 5, 55, 59);
     };
-    
+
     var imageClear = new Image();
     var imageSrc = 'assets/Buttons/clear-off-01.png';
     imageClear.src = imageSrc;
     imageClear.onload = function() {
         ctxUCR.drawImage(imageClear, 67, 5, 55, 59);
     };
-    
+
     var imageRedo = new Image();
     var imageSrc = 'assets/Buttons/redo-off-01.png';
     imageRedo.src = imageSrc;
     imageRedo.onload = function() {
         ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
     };
-       
+
     var imageUndoDown = new Image();
     var imageSrc = 'assets/Buttons/undo-on-01.png';
     imageUndoDown.src = imageSrc;
-    imageUndo.onload = function() {
-        ctxUCR.drawImage(imageUndo, 0, 5, 55, 59);
-    };
-    
+
     var imageClearDown = new Image();
     var imageSrc = 'assets/Buttons/clear-on-01.png';
     imageClearDown.src = imageSrc;
-    imageClear.onload = function() {
-        ctxUCR.drawImage(imageClear, 67, 5, 55, 59);
-    };
-    
+
     var imageRedoDown = new Image();
     var imageSrc = 'assets/Buttons/redo-on-01.png';
     imageRedoDown.src = imageSrc;
-    imageRedo.onload = function() {
-        ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
-    };
-        
-    
-        $(function() {
+
+
+    $(function() {
 
 
         $('#undoClearRedo').on('vmousedown', function(e) { // mouse move handler
-            var canvasOffset = $(canvas).offset();
+            var canvasOffset = $(canvasUCR).offset();
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
             if (canvasX <= 67) {
-                /*var imageSrc4 = 'assets/sizeSelectionExtraSmall.png';
-                image4.src = imageSrc4;
-                image4.onload = function() {
-                    ctx.drawImage(image4, 0, 0, 230, 68);*/
                 cUndo();
                 ctxUCR.clearRect(0, 5, 55, 59);
                 ctxUCR.drawImage(imageUndoDown, 0, 5, 55, 59);
             }
-
-
             if (canvasX <= 133 && canvasX > 67) {
                 setColoringPage('clear');
                 ctxUCR.clearRect(67, 5, 55, 59);
                 ctxUCR.drawImage(imageClearDown, 67, 5, 55, 59);
-                }
+            }
             if (canvasX <= 190 && canvasX > 133) {
                 cRedo();
                 ctxUCR.clearRect(133, 5, 55, 59);
                 ctxUCR.drawImage(imageRedoDown, 133, 5, 55, 59);
             }
+        });
 
+        $('#undoClearRedo').on('vmouseup', function(e) { // mouse move handler
+            var canvasOffset = $(canvas).offset();
+            var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
+            if (canvasX <= 67) {
+                ctxUCR.clearRect(0, 5, 55, 59);
+                ctxUCR.drawImage(imageUndo, 0, 5, 55, 59);
+            }
+            if (canvasX <= 133 && canvasX > 67) {
+                ctxUCR.clearRect(67, 5, 55, 59);
+                ctxUCR.drawImage(imageClear, 67, 5, 55, 59);
+            }
+            if (canvasX <= 190 && canvasX > 133) {
+                ctxUCR.clearRect(133, 5, 55, 59);
+                ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
+            }
         });
     });
-    
-    
-//  Triple-licensed: Public Domain, MIT and WTFPL license - share and enjoy!
-//
-//  chris.thomas@antimatter-studios.com: I modified this to
-//  use modernizr and the html.touch detection and also to stop counting two
-//  clicks at once, but count each click separately.
 
-    (function($) {
-        $.fn.nodoubletapzoom = function() {
-            if ($("html.touch").length === 0)
-                return;
 
-            $(this).bind('touchstart', function preventZoom(e) {
-                var t2 = e.timeStamp;
-                var t1 = $(this).data('lastTouch') || t2;
-                var dt = t2 - t1;
-                var fingers = e.originalEvent.touches.length;
-                $(this).data('lastTouch', t2);
-                if (!dt || dt > 500 || fingers > 1) {
-                    return; // not double-tap
-                }
-                e.preventDefault(); // double tap - prevent the zoom
-                // also synthesize click events we just swallowed up
-                $(this).trigger('click');
-            });
+    var canvasTools = document.getElementById('toolbox');
+    var ctxTools = canvasTools.getContext('2d');
+
+    var imagePaintDown = new Image();
+    var imageSrc = 'assets/Buttons/paint-on-01.png';
+    imagePaintDown.src = imageSrc;
+    imagePaintDown.onload = function() {
+        ctxTools.drawImage(imagePaintDown, -1, 0, 94, 87);
+    };
+    var imageSprayPaint = new Image();
+    var imageSrc = 'assets/Buttons/spraypaint-off-01.png';
+    imageSprayPaint.src = imageSrc;
+    imageSprayPaint.onload = function() {
+        ctxTools.drawImage(imageSprayPaint, 95, 0, 94, 87);
+    };
+    var imagePour = new Image();
+    var imageSrc = 'assets/Buttons/pour-off-01.png';
+    imagePour.src = imageSrc;
+    imagePour.onload = function() {
+        ctxTools.drawImage(imagePour, -1, 90, 94, 87);
+    };
+    var imageEraser = new Image();
+    var imageSrc = 'assets/Buttons/eraser-off-01.png';
+    imageEraser.src = imageSrc;
+    imageEraser.onload = function() {
+        ctxTools.drawImage(imageEraser, 95, 90, 94, 87);
+    };
+    
+    var imagePaint = new Image();
+    var imageSrc = 'assets/Buttons/paint-off-01.png';
+    imagePaint.src = imageSrc;
+    
+    var imageSprayPaintDown = new Image();
+    var imageSrc = 'assets/Buttons/spraypaint-on-01.png';
+    imageSprayPaintDown.src = imageSrc;
+    
+    var imagePourDown = new Image();
+    var imageSrc = 'assets/Buttons/pour-on-01.png';
+    imagePourDown.src = imageSrc;
+    
+    var imageEraserDown = new Image();
+    var imageSrc = 'assets/Buttons/eraser-on-01.png';
+    imageEraserDown.src = imageSrc;
+
+
+    $(function() {
+
+        $('#toolbox').on('vmousedown', function(e) { // mouse move handler
+            var canvasOffset = $(canvasTools).offset();
+            var canvasX = Math.floor(e.pageX - canvasOffset.left);
+            var canvasY = Math.floor(e.pageY - canvasOffset.top);
+
+            if (canvasX <= 94 && canvasY <= 87 ) {
+                state = paint;
+                toggleTools();
+                ctxTools.clearRect(-1, 0, 94, 87);
+                ctxTools.drawImage(imagePaintDown, -1, 0, 94, 87);
+            }
+            if (canvasX <= 94 && canvasY > 94 && canvasY < 182) {
+                state = fillBucket;
+                toggleTools();
+                ctxTools.clearRect(-1, 90, 94, 87);
+                ctxTools.drawImage(imagePourDown, -1, 90, 94, 87);
+            }
+            if (canvasX > 94 && canvasY <= 87 ) {
+                state = spray;
+                toggleTools();
+                ctxTools.clearRect(95, 0, 94, 87);
+                ctxTools.drawImage(imageSprayPaintDown, 95, 0, 94, 87);
+            }
+            if (canvasX > 94 && canvasY > 94 && canvasY < 182) {
+                state = eraser;
+                toggleTools();
+                ctxTools.clearRect(95, 90, 94, 87);
+                ctxTools.drawImage(imageEraserDown, 95, 90, 94, 87);
+            }
+        });
+        
+        var toggleTools = function() {
+            ctxTools.clearRect(-1, 0, 189, 188);
+            ctxTools.drawImage(imagePaint, -1, 0, 94, 87);
+            ctxTools.drawImage(imagePour, -1, 90, 94, 87);
+            ctxTools.drawImage(imageSprayPaint, 95, 0, 94, 87);
+            ctxTools.drawImage(imageEraser, 95, 90, 94, 87);
         };
-    })(jQuery);
-    $("body").nodoubletapzoom();
+    });
 };
 
 //***************** Size Select Canvas Events End ******************//
@@ -981,11 +718,11 @@ var setPaint = function(hex) {
     currentColorG = parseInt((cutHex(hex)).substring(2, 4), 16);
     currentColorB = parseInt((cutHex(hex)).substring(4, 6), 16);
     currentColorA = 255;
-    currentColor = "rgb(" + currentColorR + ", " + currentColorG + ", " + currentColorB + ")";
+    currentColor = "rgba(" + currentColorR + ", " + currentColorG + ", " + currentColorB + ", 255)";
     ctx.fillStyle = currentColor;
     ctx.fillRect(10, 4, 210, 60);
-    ctx.drawImage(image3, 0, 0, 230, 68);
-    ctx.drawImage(image4, 0, 0, 230, 68);
+    ctx.drawImage(image3, 0, 0, 200, 60);
+    ctx.drawImage(image4, 0, 0, 200, 60);
     $('#preview').css('backgroundColor', currentColor);
     $('#brushtool').css('backgroundColor', currentColor);
     $('#buckettool').css('backgroundColor', currentColor);
@@ -1014,15 +751,6 @@ var setColoringPage = function(imagePath) {
         cClear();
     }
 
-   /* if (buttonColor) {
-        $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-        $('#preview').css('backgroundColor', currentColor);
-        buttonColor = false;
-        if (colorPanelOpen) {
-            $('.colorselect').fadeToggle("fast", "linear");
-            colorPanelOpen = false;
-        }
-    }*/
     cClear();
     context1.save;
     context1.setTransform(1, 0, 0, 1, 0, 0);
@@ -1060,7 +788,7 @@ function floodFillScanLine(x, y, curColor, ctx, outlineCtx) {
     pixelAddress = (y * width + x) * 4;
     var color = ctx.getImageData(x, y, width, height);
     var pixel = color.data;
-    var pixelColor = "rgb(" + pixel[0] + ", " + pixel[1] + ", " + pixel[2] + ")";
+    var pixelColor = "rgba(" + pixel[0] + ", " + pixel[1] + ", " + pixel[2] + ", 255)";
     oColorData = outlineCtx.getImageData(0, 0, width, height);
 
     var startColorR = colorData.data[pixelAddress];
