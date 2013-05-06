@@ -28,9 +28,9 @@ body{
 }
 #drawingCanvas{
     border: 1px solid black;
-    position: absolute;
-    left: -100px;
-    top: 0px;
+    position: fixed;
+    left: 210px;
+    top: 1%;
     cursor: pointer;
 }
 
@@ -45,16 +45,16 @@ body{
     background-color: white;
     position: absolute;
     top: 0%;
-    left: 1%;
+    left: .5%;
 }
 
 
 #preview {
-    background: url("assets/paintPalette.png") repeat scroll center center transparent;
+    background: url("assets/Buttons/spectrum-01.png") repeat scroll center center transparent;
     background-color: #000000;
-    box-shadow: 0px 0px 0px #444444;
-    /*border-top: solid 3px #eaeaea;
-    border-left: solid 3px #eaeaea;
+   /* box-shadow: 0px 0px 0px #444444;*/
+    border: solid 1px #000000;
+  /*  border-left: solid 3px #eaeaea;
     border-bottom: solid 3px #777;
     border-right: solid 3px #777;*/
     border-radius:10px;
@@ -106,7 +106,7 @@ body{
 }
 .paintbutton{
     border: solid 0px whitesmoke;
-    border-radius: 10px; 
+    border-radius: 10px;
     margin: 0px auto;
     cursor: pointer;
     height: 60px;
@@ -129,6 +129,17 @@ body{
     margin: 0px;
     left: 1.2%;
     top: 50%;
+    z-index: 2;
+}
+#toolboxBackground{
+    /*border: solid 1px #000000;*/
+    z-index: 0;
+    position: absolute;
+    margin: 0px;
+    left: 1.2%;
+    top: 50%;
+    background-color: #ffcc00;
+    
 }
 #colorTable{
     position: absolute;
@@ -164,9 +175,9 @@ body{
 #layer1{
     pointer-events:none;
     background: transparent;
-    position: absolute;
-    left: -100px;
-    top: 0px;
+    position: fixed;
+    left: 210px;
+    top: 1%;
     cursor: crosshair;
 }
 
@@ -195,8 +206,8 @@ body{
 }
 #scrollContainer{
     position: absolute;
-    top: 2%;
-    right: 10px;
+    top: 3.75%;
+    right: 2.4%;
     height: 600px; 
     width: 90px; 
 }

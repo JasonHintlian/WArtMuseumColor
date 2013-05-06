@@ -22,30 +22,27 @@
     <body>
         <table id="colorTable"> <!-- start color buttons table -->
             <tr>
-                <td><div  class="paintbutton" style="background:#ffcc00;" onclick= "setPaint('#ffcc00');"></div></td>
-                <td><div  class="paintbutton" style="background:#ffa347;" onclick= "setPaint('#ffa347');"></div></td>
-                <td><div  class="paintbutton" style="background:#e65c00;" onclick= "setPaint('#e65c00');"></div></td>
-                
-                
+                <td><div  id="color1" class="paintbutton" style="background:#ffcc00;"></div></td>
+                <td><div  id="color2" class="paintbutton" style="background:#ffa347;"></div></td>
+                <td><div  id="color3" class="paintbutton" style="background:#e65c00;"></div></td>
                 <!--<td><div  class="paintbutton" style="background:#ffffff;" onclick= "setPaint('#ffffff');"></div></td>-->
             </tr>
             <tr>
-                <td><div  class="paintbutton" style="background:#52cccc;" onclick= "setPaint('#52cccc');"></div></td>
-                <td><div  class="paintbutton" style="background:#29a6cf;" onclick= "setPaint('#29a6cf');"></div></td>
-                <td><div  class="paintbutton" style="background:#3083d6;" onclick= "setPaint('#3083d6');"></div></td>
-    
-               <!-- <td><div  class="paintbutton" style="background:#000000;" onclick= "setPaint('#000000');"></div></td> -->
+                <td><div  id="color4" class="paintbutton" style="background:#52cccc;"></div></td>
+                <td><div  id="color5" class="paintbutton" style="background:#29a6cf;"></div></td>
+                <td><div  id="color6" class="paintbutton" style="background:#3083d6;"></div></td>
+            <!-- <td><div  class="paintbutton" style="background:#000000;" onclick= "setPaint('#000000');"></div></td> -->
             </tr>
             <tr>
-                <td><div  class="paintbutton" style="background:#f8ddd4;" onclick= "setPaint('#f8ddd4');"></div></td>
-                <td><div  class="paintbutton" style="background:#efb29e;" onclick= "setPaint('#efb29e');"></div></td>
-                <td><div  class="paintbutton" style="background:#bc8f8f;" onclick= "setPaint('#bc8f8f');"></div></td>
+                <td><div  id="color7" class="paintbutton" style="background:#f8ddd4;"></div></td>
+                <td><div  id="color8" class="paintbutton" style="background:#efb29e;"></div></td>
+                <td><div  id="color9" class="paintbutton" style="background:#bc8f8f;"></div></td>
                 <!-- <td><div class ="paintbutton"  id = "preview"></div></td> -->
             </tr>
             <tr>
-                <td><div  class="paintbutton" style="background:#deb887;" onclick= "setPaint('#deb887');"></div></td>
-                <td><div  class="paintbutton" style="background:#993300;" onclick= "setPaint('#993300');"></div></td>
-                <td><div  class="paintbutton" style="background:#b85c00;" onclick= "setPaint('#b85c00');"></div></td>
+                <td><div  id="color10" class="paintbutton" style="background:#deb887;"></div></td>
+                <td><div  id="color11" class="paintbutton" style="background:#b85c00;"></div></td>
+                <td><div  id="color12" class="paintbutton" style="background:#993300;"></div></td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -57,7 +54,7 @@
 
 
 
-        <table style = "z-index: 3">
+        <table>
             <!-- color selection element -->
             <tr>
                 <canvas id="layer3" class="sizeselect" width="200" height="60"></canvas>
@@ -69,37 +66,10 @@
                 <canvas id="toolbox" width="188" height="188"></canvas>
             <tr>
             
-            <!--<tr>
-                <td>
-                    <div class ="tilebutton" id ="brushtool"></div>
-                </td>
-                <td>
-                    <div class ="tilebutton" id ="buckettool"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class ="tilebutton" id ="spraytool"></div>
-                </td>
-                <td>
-                    <div class ="tilebutton" id ="erasertool"></div>
-                </td>
-            </tr>-->
         </table>
-      <!--  <table id ="undoClearRedo">
-            <tr >
-                <td>
-                    <div class ="ucr" id ="undoButton"></div>
-                </td>
-                <td>
-                    <div class ="ucr" id ="cleartool"></div>
-                </td>
-                <td>
-                    <div class ="ucr" id ="redoButton"></div>
-                </td>
-            </tr>
-
-        </table>-->
+        <div>
+            <canvas id="toolboxBackground" width="188" height="188"></canvas>
+        <div>
 
         <!-- Canvas -->
         <div id ="coloringCanvas">
@@ -121,25 +91,25 @@
                             <div id="carousel" onclick=''  >
                                 <ul>
                                     <li>
-                                        <img onclick= "setColoringPage(statue1);" class ="coloringPage" src ="assets/thumb1.png">
+                                        <img id="pic1" class ="coloringPage" src ="assets/thumb1.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue2);" class ="coloringPage" src ="assets/thumb2.png">
+                                        <img id="pic2" class ="coloringPage" src ="assets/thumb2.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue3);" class ="coloringPage" src ="assets/thumb3.png">
+                                        <img id="pic3" class ="coloringPage" src ="assets/thumb3.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue4);" class ="coloringPage" src ="assets/thumb4.png">
+                                        <img id="pic4" class ="coloringPage" src ="assets/thumb4.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue5);" class ="coloringPage" src ="assets/thumb5.png">
+                                        <img id="pic5" class ="coloringPage" src ="assets/thumb5.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue6);" class ="coloringPage" src ="assets/thumb6.png">
+                                        <img id="pic6" class ="coloringPage" src ="assets/thumb6.png">
                                     </li>
                                     <li>
-                                        <img onclick= "setColoringPage(statue7);" class ="coloringPage" src ="assets/thumb7.png">
+                                        <img id="pic7" class ="coloringPage" src ="assets/thumb7.png">
                                     </li>
                                 </ul>
                             </div>

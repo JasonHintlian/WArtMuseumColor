@@ -12,16 +12,6 @@ var eraser = "eraser";
 var spray = "spray";
 var state = "paint";
 
-// coloring scroll book image locations
-var statue1 = "assets/1.png";
-var statue2 = "assets/2.png";
-var statue3 = "assets/3.png";
-var statue4 = "assets/4.png";
-var statue5 = "assets/5.png";
-var statue6 = "assets/6.png";
-var statue7 = "assets/7.png";
-var blank = "assets/blank.png";
-
 var sizePanelOpen = false;
 var colorPanelOpen = false;
 var buttonColor = false;
@@ -39,19 +29,19 @@ var currentSize = sizeMedium;
 
 // holds the coloring page
 var outlineImage = new Image();
-var currentPage = statue1;
+var currentPage = "assets/1.png";
 
 // color variables
 var colorData;
 var outlineColorData;
-var currentColor = "rgba(0, 0, 0, 255)";
+var currentColor = "rgba(255, 204, 0, 255)";
 var currentColorR = 0;
 var currentColorG = 0;
 var currentColorB = 0;
 var currentColorA = 255;
 
 //var currentState = new Red(this);
-var myCanvas, layer1, context, context1, canvas, ctx, undoRedoClear;
+var myCanvas, layer1, context, context1, canvas, ctx, undoRedoClear, canvasTools, ctxTools;
 
 var image3 = new Image();
 var imageSrc3 = 'assets/sizeSelection.png';
@@ -61,23 +51,14 @@ var image4 = new Image();
 var imageSrc4 = 'assets/sizeSelectionMedium.png';
 image4.src = imageSrc4;
 
+// mobile safari fix for redo and undo
+var userAgent = window.navigator.userAgent;
+
 window.onload = window.onresize = function() {
-
-    /* $(document).bind('touchmove', function(e) {
-     e.preventDefault();
-     }
-     );
-     */
-
 
 // color menu
     var canvas1 = document.getElementById('layer2');
     var ctx1 = canvas1.getContext('2d');
-
-
-    // ctx = document.getElementById('myCanvas').getContext("2d");
-
-
 
     // Get the canvas element and its drawing context
     myCanvas = document.getElementById('drawingCanvas');
@@ -90,14 +71,12 @@ window.onload = window.onresize = function() {
     canvas = document.getElementById('layer3');
     ctx = canvas.getContext('2d');
 
-    //document.addEventListener("touchmove", preventBehavior, false);
+    // tool box menu
+    canvasTools = document.getElementById('toolbox');
+    ctxTools = canvasTools.getContext('2d');
 
-    /*$('DrawingCanvas').on('touchmove', function(e) {
-     e.preventDefault();
-     });
-     $('layer1').on('touchmove', function(e) {
-     e.preventDefault();
-     });*/
+    var canvasToolsBackground = document.getElementById('toolboxBackground');
+    var ctxToolsBackground = canvasToolsBackground.getContext('2d');
 
     // set canvas width to 60% of the window note: canvas
     // id in css must be set to left: 20%; to accomadate
@@ -142,10 +121,11 @@ window.onload = window.onresize = function() {
         cPush();
     };
 
+    // sets the border to the 1st color yellow
+    $('#color1').css('box-shadow', '0px 0px 2pt 1pt #000000');
 
-
-
-
+    // sets the border to the 1st pic1 
+    $('#pic1').css('box-shadow', '0px 0px 2pt 1pt #000000');
 
 
     //***************** Drawing Canvas Events ******************//
@@ -193,16 +173,6 @@ window.onload = window.onresize = function() {
             }
         }
         painting = true;
-
-
-
-        /* if (colorPanelOpen) {
-         $('.colorselect').fadeToggle("fast", "linear");
-         colorPanelOpen = false;
-         $("#preview").toggleClass("down");
-         $('#preview').css("border", "0px 0px 0px #333333");
-         buttonColor = false;
-         }*/
     });
 
 
@@ -269,41 +239,146 @@ window.onload = window.onresize = function() {
 
     //***************** Drawing Canvas Events ******************//
 
+    //****************** Paint Buttons *******************//
 
-        //***************** Color Button ******************//
+    $('#color1').on('vmousedown', function() {
+        setPaint('#ffcc00');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color1').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color2').on('vmousedown', function() {
+        setPaint('#ffa347');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color2').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color3').on('vmousedown', function() {
+        setPaint('#e65c00');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color3').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color4').on('vmousedown', function() {
+        setPaint('#52cccc');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color4').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color5').on('vmousedown', function() {
+        setPaint('#29a6cf');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color5').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color6').on('vmousedown', function() {
+        setPaint('#3083d6');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color6').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color7').on('vmousedown', function() {
+        setPaint('#f8ddd4');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color7').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color8').on('vmousedown', function() {
+        setPaint('#efb29e');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color8').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color9').on('vmousedown', function() {
+        setPaint('#bc8f8f');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color9').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color10').on('vmousedown', function() {
+        setPaint('#deb887');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color10').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color11').on('vmousedown', function() {
+        setPaint('#b85c00');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color11').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#color12').on('vmousedown', function() {
+        setPaint('#993300');
+        $('.paintbutton').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#color12').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
 
-        $('#preview').on('vmousedown', function() {
+    //****************** Paint Buttons End*******************//
 
-            $('#preview').css('backgroundColor', currentColor);
-            $('#brushtool').css('backgroundColor', currentColor);
-            $('#buckettool').css('backgroundColor', currentColor);
-            $('#spraytool').css('backgroundColor', currentColor);
-            if (!buttonColor) {
-                // $('#preview').css("box-shadow", "10px 10px 10px #666666");
-                //$('#preview').css("border", "1px solid #666666");
-                $('#preview').css("background", "url(assets/paintPalette2.png)");
-                buttonColor = true;
-            } else {
-                // $('#preview').css("box-shadow", "10px 10px 10px #ffffff");
-                $('#preview').css("background", "url(assets/paintPalette.png)");
-                buttonColor = false;
+    //****************** Statue Buttons *******************//
 
-            }
+    $('#pic1').on('vmousedown', function() {
+        setColoringPage("assets/1.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic1').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic2').on('vmousedown', function() {
+        setColoringPage("assets/2.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic2').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic3').on('vmousedown', function() {
+        setColoringPage("assets/3.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic3').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic4').on('vmousedown', function() {
+        setColoringPage("assets/4.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic4').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic5').on('vmousedown', function() {
+        setColoringPage("assets/5.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic5').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic6').on('vmousedown', function() {
+        setColoringPage("assets/6.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic6').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
+    $('#pic7').on('vmousedown', function() {
+        setColoringPage("assets/7.png");
+        $('.coloringPage').css('box-shadow', '0px 0px 0pt 0pt #000000');
+        $('#pic7').css('box-shadow', '0px 0px 2pt 1pt #000000');
+    });
 
-            $('#preview').css('backgroundColor', currentColor);
-
-            if (colorPanelOpen) {
-                colorPanelOpen = false;
-                $('.colorselect').fadeToggle("fast", "linear");
-            } else {
-                colorPanelOpen = true;
-                $('.colorselect').fadeToggle("fast", "linear");
-            }
-        });
 
 
 
-        //***************** Color Button End ******************//
+
+
+
+
+    //***************** Color Button ******************//
+
+    $('#preview').on('vmousedown', function() {
+
+        $('#preview').css('backgroundColor', currentColor);
+        $('#brushtool').css('backgroundColor', currentColor);
+        $('#buckettool').css('backgroundColor', currentColor);
+        $('#spraytool').css('backgroundColor', currentColor);
+        if (!buttonColor) {
+            $('#preview').css("border", "0px solid #000000");
+            $('#preview').css("background", "url(assets/paintPalette2.png)");
+            buttonColor = true;
+        } else {
+            $('#preview').css("border", "1px solid #000000");
+            $('#preview').css("background", "url(assets/Buttons/spectrum-01.png)");
+            buttonColor = false;
+
+        }
+
+        $('#preview').css('backgroundColor', currentColor);
+
+        if (colorPanelOpen) {
+            colorPanelOpen = false;
+            $('.colorselect').fadeToggle("fast", "linear");
+        } else {
+            colorPanelOpen = true;
+            $('.colorselect').fadeToggle("fast", "linear");
+        }
+    });
+    //***************** Color Button End ******************//
 
 
     //***************** Color Select Canvas Events ******************//
@@ -311,6 +386,7 @@ window.onload = window.onresize = function() {
     // color menu
     var canvas1 = document.getElementById('layer2');
     var ctx1 = canvas1.getContext('2d');
+    colorSelectDown = false;
 
     $(function() {
         // drawing active image
@@ -327,48 +403,66 @@ window.onload = window.onresize = function() {
             // ctx1.drawImage(image2, 210, 168, 40, 20);
         };
 
-        var currentY = 168;
-        var selectArrowDown = false;
-
-        $('#image2').hover(function(e) {
-            // slider range 14 to 168
-            ctx1.drawImage(image2, 210, 50, 40, 20);
-        });
         $('#layer2').on('vmousedown', function(e) {
             var canvasOffset = $(canvas1).offset();
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
             var canvasY = Math.floor(e.pageY - canvasOffset.top);
-
-            if (canvasX > 190 && canvasX < 260) {
-                if (canvasY < 24) {
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, 14, 40, 20);
-                    currentY = 14;
-                }
-                else if (canvasY > 178) {
-
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, 168, 40, 20);
-                    currentY = 168;
-                }
-                else {
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, canvasY - 10, 40, 20);
-                    currentY = canvasY - 10;
-                }
-                selectArrowDown = true;
-            }
+            colorSelectDown = true;
         });
 
         $('#layer2').on('vmouseup', function(e) { // mouse move handler
 
-            selectArrowDown = false;
+            colorSelectDown = false;
 
             var canvasOffset = $(canvas1).offset();
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
             var canvasY = Math.floor(e.pageY - canvasOffset.top);
+            //$('.paintbutton').css('outline', '0px solid #000000'); 
 
-            if (canvasX <= 190) {
+            // get current pixel
+            var imageData = ctx1.getImageData(canvasX, canvasY, 1, 1);
+
+            // gets the color data for the pixel
+            var pixel = imageData.data;
+
+            // stores rgb color value in pixelColor
+            var pixelColor = "rgba(" + pixel[0] + ", " + pixel[1] + ", " + pixel[2] + ", " + pixel[3] + ")";
+
+            // set the background color of preview
+            $('#preview').css('backgroundColor', pixelColor);
+
+            // sets the paint color to the current color and rgb values
+            currentColorR = pixel[0];
+            currentColorG = pixel[1];
+            currentColorB = pixel[2];
+            currentColorA = pixel[3];
+            currentColor = pixelColor;
+            $('#preview').css('backgroundColor', pixelColor);
+            $('#brushtool').css('backgroundColor', pixelColor);
+            $('#buckettool').css('backgroundColor', pixelColor);
+            $('#spraytool').css('backgroundColor', pixelColor);
+            $('#toolboxBackground').css('backgroundColor', currentColor);
+
+            ctx.fillStyle = currentColor;
+            ctx.fillRect(10, 4, 210, 60);
+            ctx.drawImage(image3, 0, 0, 200, 60);
+            ctx.drawImage(image4, 0, 0, 200, 60);
+
+        });
+
+
+        $('#layer2').on('vmouseout', function(e) {
+            //colorSelectDown = false;
+        });
+
+        $('#layer2').on('vmousemove', function(e) {
+            e.preventDefault();
+            // get coordinates of current position
+            var canvasOffset = $(canvas1).offset();
+            var canvasX = Math.floor(e.pageX - canvasOffset.left);
+            var canvasY = Math.floor(e.pageY - canvasOffset.top);
+
+            if (colorSelectDown === true) {
                 // get current pixel
                 var imageData = ctx1.getImageData(canvasX, canvasY, 1, 1);
 
@@ -381,85 +475,17 @@ window.onload = window.onresize = function() {
                 // set the background color of preview
                 $('#preview').css('backgroundColor', pixelColor);
 
-                // sets the paint color to the current color and rgb values
-                currentColorR = pixel[0];
-                currentColorG = pixel[1];
-                currentColorB = pixel[2];
-                currentColorA = pixel[3];
-                currentColor = pixelColor;
                 $('#preview').css('backgroundColor', pixelColor);
                 $('#brushtool').css('backgroundColor', pixelColor);
                 $('#buckettool').css('backgroundColor', pixelColor);
                 $('#spraytool').css('backgroundColor', pixelColor);
 
-                ctx.fillStyle = currentColor;
+                ctx.fillStyle = pixelColor;
                 ctx.fillRect(10, 4, 210, 60);
                 ctx.drawImage(image3, 0, 0, 200, 60);
                 ctx.drawImage(image4, 0, 0, 200, 60);
-            }
-
-
-            if (canvasX > 190 && canvasX < 260 && selectArrowDown) {
-                var high = 0;
-                var low = 0;
-
-                if (currentColorR < currentColorG) {
-                    high = currentColorG;
-                    low = currentColorR;
-                } else {
-                    high = currentColorR;
-                    low = currentColorG;
-                }
-                if (currentColorB > high) {
-                    high = currentColorB;
-                }
-                if (currentColorB < low) {
-                    low = currentColorB;
-                }
-
-                if (high > 0) {
-
-                }
-                //colorPanelOpen = false;
-                // closes the color palette window
-                // set the background color of preview
-
-                //$('.colorselect').fadeToggle(200, "linear");
-                //$('#preview').css("box-shadow", "0px 0px 0px #333333");
-                // buttonColor = false;
-            }
-
-        });
-
-
-        $('#layer2').on('vmouseout', function(e) {
-            selectArrowDown = false;
-        });
-
-        $('#layer2').on('vmousemove', function(e) {
-            e.preventDefault();
-            // get coordinates of current position
-            var canvasOffset = $(canvas1).offset();
-            var canvasX = Math.floor(e.pageX - canvasOffset.left);
-            var canvasY = Math.floor(e.pageY - canvasOffset.top);
-
-            if (canvasX > 190 && canvasX < 260 && selectArrowDown) {
-                if (canvasY < 24) {
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, 14, 40, 20);
-                    currentY = 14;
-                }
-                else if (canvasY > 178) {
-
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, 168, 40, 20);
-                    currentY = 168;
-                }
-                else {
-                    ctx1.clearRect(210, currentY, 41, 21);
-                    ctx1.drawImage(image2, 210, canvasY - 10, 40, 20);
-                    currentY = canvasY - 10;
-                }
+                $('#toolboxBackground').css('backgroundColor', pixelColor);
+                ctx.fillStyle = currentColor;
             }
         });
     });
@@ -585,19 +611,29 @@ window.onload = window.onresize = function() {
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
 
             if (canvasX <= 67) {
-                cUndo();
                 ctxUCR.clearRect(0, 5, 55, 59);
                 ctxUCR.drawImage(imageUndoDown, 0, 5, 55, 59);
+                cUndo();
+                // mobile safari fix for redo and undo
+                // iPad or iPhone
+                if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+                    cUndo();
+                }
             }
             if (canvasX <= 133 && canvasX > 67) {
-                setColoringPage('clear');
                 ctxUCR.clearRect(67, 5, 55, 59);
                 ctxUCR.drawImage(imageClearDown, 67, 5, 55, 59);
+                context.fillRect(0, 0, myCanvas.width, myCanvas.height);
+                cPush();
             }
             if (canvasX <= 190 && canvasX > 133) {
-                cRedo();
                 ctxUCR.clearRect(133, 5, 55, 59);
                 ctxUCR.drawImage(imageRedoDown, 133, 5, 55, 59);
+                cRedo();
+                // mobile safari fix for redo and undo
+                if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+                    cRedo();
+                }
             }
         });
 
@@ -617,12 +653,30 @@ window.onload = window.onresize = function() {
                 ctxUCR.clearRect(133, 5, 55, 59);
                 ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
             }
+            else {
+                ctxUCR.clearRect(0, 0, 55, 190);
+                ctxUCR.drawImage(imageUndo, 0, 5, 55, 59);
+                ctxUCR.drawImage(imageClear, 67, 5, 55, 59);
+                ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
+            }
+        });
+        $('#undoClearRedo').on('vmouseout', function(e) { // mouse move handler
+
+            ctxUCR.clearRect(0, 0, 55, 190);
+            ctxUCR.drawImage(imageUndo, 0, 5, 55, 59);
+            ctxUCR.drawImage(imageClear, 67, 5, 55, 59);
+            ctxUCR.drawImage(imageRedo, 133, 5, 55, 59);
+
         });
     });
 
 
-    var canvasTools = document.getElementById('toolbox');
-    var ctxTools = canvasTools.getContext('2d');
+    var toolBoxBackground = new Image();
+    var imageSrc = 'assets/toolBoxBackground.png';
+    toolBoxBackground.src = imageSrc;
+    toolBoxBackground.onload = function() {
+        ctxTools.drawImage(toolBoxBackground, 0, 0, 188, 188);
+    };
 
     var imagePaintDown = new Image();
     var imageSrc = 'assets/Buttons/paint-on-01.png';
@@ -646,21 +700,25 @@ window.onload = window.onresize = function() {
     var imageSrc = 'assets/Buttons/eraser-off-01.png';
     imageEraser.src = imageSrc;
     imageEraser.onload = function() {
+        ctxTools.drawImage(toolBoxBackground, 0, 0, 188, 188);
+        ctxTools.drawImage(imagePaintDown, -1, 0, 94, 87);
+        ctxTools.drawImage(imageSprayPaint, 95, 0, 94, 87);
+        ctxTools.drawImage(imagePour, -1, 90, 94, 87);
         ctxTools.drawImage(imageEraser, 95, 90, 94, 87);
     };
-    
+
     var imagePaint = new Image();
     var imageSrc = 'assets/Buttons/paint-off-01.png';
     imagePaint.src = imageSrc;
-    
+
     var imageSprayPaintDown = new Image();
     var imageSrc = 'assets/Buttons/spraypaint-on-01.png';
     imageSprayPaintDown.src = imageSrc;
-    
+
     var imagePourDown = new Image();
     var imageSrc = 'assets/Buttons/pour-on-01.png';
     imagePourDown.src = imageSrc;
-    
+
     var imageEraserDown = new Image();
     var imageSrc = 'assets/Buttons/eraser-on-01.png';
     imageEraserDown.src = imageSrc;
@@ -673,34 +731,39 @@ window.onload = window.onresize = function() {
             var canvasX = Math.floor(e.pageX - canvasOffset.left);
             var canvasY = Math.floor(e.pageY - canvasOffset.top);
 
-            if (canvasX <= 94 && canvasY <= 87 ) {
+            if (canvasX <= 94 && canvasY <= 87) {
                 state = paint;
                 toggleTools();
                 ctxTools.clearRect(-1, 0, 94, 87);
+                ctxToolsBackground.drawImage(toolBoxBackground, 0, 0, 188, 188);
                 ctxTools.drawImage(imagePaintDown, -1, 0, 94, 87);
             }
             if (canvasX <= 94 && canvasY > 94 && canvasY < 182) {
                 state = fillBucket;
                 toggleTools();
                 ctxTools.clearRect(-1, 90, 94, 87);
+                ctxToolsBackground.drawImage(toolBoxBackground, 0, 0, 188, 188);
                 ctxTools.drawImage(imagePourDown, -1, 90, 94, 87);
             }
-            if (canvasX > 94 && canvasY <= 87 ) {
+            if (canvasX > 94 && canvasY <= 87) {
                 state = spray;
                 toggleTools();
                 ctxTools.clearRect(95, 0, 94, 87);
+                ctxToolsBackground.drawImage(toolBoxBackground, 0, 0, 188, 188);
                 ctxTools.drawImage(imageSprayPaintDown, 95, 0, 94, 87);
             }
             if (canvasX > 94 && canvasY > 94 && canvasY < 182) {
                 state = eraser;
                 toggleTools();
                 ctxTools.clearRect(95, 90, 94, 87);
+                ctxToolsBackground.drawImage(toolBoxBackground, 0, 0, 188, 188);
                 ctxTools.drawImage(imageEraserDown, 95, 90, 94, 87);
             }
         });
-        
+
         var toggleTools = function() {
             ctxTools.clearRect(-1, 0, 189, 188);
+            ctxTools.drawImage(toolBoxBackground, 0, 0, 188, 188);
             ctxTools.drawImage(imagePaint, -1, 0, 94, 87);
             ctxTools.drawImage(imagePour, -1, 90, 94, 87);
             ctxTools.drawImage(imageSprayPaint, 95, 0, 94, 87);
@@ -723,6 +786,7 @@ var setPaint = function(hex) {
     ctx.fillRect(10, 4, 210, 60);
     ctx.drawImage(image3, 0, 0, 200, 60);
     ctx.drawImage(image4, 0, 0, 200, 60);
+    $('#toolboxBackground').css('backgroundColor', currentColor);
     $('#preview').css('backgroundColor', currentColor);
     $('#brushtool').css('backgroundColor', currentColor);
     $('#buckettool').css('backgroundColor', currentColor);
@@ -743,15 +807,8 @@ var setSize = function(size) {
 // this function sets the coloring page its called from the coresponding html button
 var setColoringPage = function(imagePath) {
 
-    if (imagePath === 'clear') {
-        // do nothing
-    } else {
-        outlineImage.src = imagePath;
-        currentPage = imagePath;
-        cClear();
-    }
-
-    cClear();
+    outlineImage.src = imagePath;
+    currentPage = imagePath;
     context1.save;
     context1.setTransform(1, 0, 0, 1, 0, 0);
     context1.clearRect(0, 0, layer1.width, layer1.height);
